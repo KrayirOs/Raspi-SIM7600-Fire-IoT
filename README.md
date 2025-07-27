@@ -157,9 +157,9 @@ https://your-project-id-default-rtdb.firebaseio.com
 
 ```python
 CONFIG = {
-    "phone_number": "+905051234567",
+    "phone_number": "+(numaran)",
     "sms_message": "UYARI: Yuksek dogrulukta yangin tespit edildi!",
-    "pin_code": "1234",
+    "pin_code": "1234(tlefo pincodun varsa)",
     "call_threshold": 0.80,
     "sms_threshold": 0.70
 }
