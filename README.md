@@ -67,9 +67,6 @@ Bu sistem özellikle **ormanlar, endüstriyel alanlar** ve **uzak bölgeler** gi
   ```bash
   sudo apt install -y libcamera-tools git screen python3-venv
 
-#  Raspi-SIM7600-Fire-IoT
-
-Raspberry Pi, SIM7600 4G modülü ve YOLO görüntü işleme teknolojisini kullanarak **gerçek zamanlı yangın tespiti**, **SMS/arama bildirimi** ve **Firebase entegrasyonu** sağlayan akıllı sistemdir.
 
 ---
 
