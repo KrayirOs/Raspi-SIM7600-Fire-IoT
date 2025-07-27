@@ -14,8 +14,6 @@ import RPi.GPIO as GPIO
 
 
 # --- CONFIGURASYON AYARLARI ---
-# Hassas verileri doğrudan buraya yazmak yerine çevre değişkenlerinden okumak daha güvenlidir.
-# GitHub'a yüklerken bu tür bilgileri kod içinde bırakmamaya özen gösterin.
 CONFIG = {
     "camera_width": 640,
     "camera_height": 480,
@@ -33,34 +31,22 @@ CONFIG = {
     ],
 
     # --- İletişim Ayarları ---
-    # Telefon numarası ve PIN kodu gibi hassas bilgiler çevre değişkenlerinden okunmalı.
-    # Örneğin (Linux/macOS terminalde):
-    # export PHONE_NUMBER="+905051234567"
-    # export SIM_PIN="1234"
-    # Windows'ta:
-    # set PHONE_NUMBER="+905051234567"
-    # set SIM_PIN="1234"
-    # Veya bir .env dosyası kullanıp python-dotenv gibi bir kütüphane ile okuyabilirsiniz.
-    "phone_number": os.getenv("PHONE_NUMBER", "+905051234567"), 
+    "phone_number": os.getenv("PHONE_NUMBER", "+901234567"),
     "sms_message": "UYARI: Yuksek dogrulukta yangin tespit edildi! Konum bilgisi Firebase'de.",
-    "pin_code": os.getenv("SIM_PIN", ""), # Varsayılan olarak boş bırakıldı. Canlıda çevre değişkeni kullanılmalı.
+    "pin_code": os.getenv("SIM_PIN", ""),
     "call_threshold": 0.80,         # Arama tetiklemek için güvenirlik eşiği
     "sms_threshold": 0.70           # SMS tetiklemek için güvenirlik eşiği
 }
 # ------------------------------
 
-
-# Örneğin: export FIREBASE_RTDB_URL="https://your-project-id-default-rtdb.firebaseio.com/veri"
-# NOT: URL'nin sonunda '/' olmamasına dikkat edin, fonksiyon içinde eklenecek.
-FIREBASE_URL = os.getenv("FIREBASE_RTDB_URL", "https://your-project-id-default-rtdb.firebaseio.com//veri") # Varsayılan URL
+# --- Firebase ve GPS Ayarları ---
+FIREBASE_URL = os.getenv("FIREBASE_RTDB_URL", "https://your-project-id-default-rtdb.firebaseio.com/veri")
 GPS_PORT = '/dev/ttyS0'
 GPS_BAUDRATE = 115200
 ser = None # Global seri port objesi
 power_key = 6 # SIM7600X güç anahtarı GPIO pini
 
 # --- YOLO Modeli Yükle ---
-# "best.pt" modeli büyük bir dosya olabileceği veya hassas bilgiler içerebileceği için
-# GitHub'a doğrudan yüklenmemeli, .gitignore dosyasına eklenmelidir.
 model = YOLO("best.pt")
 
 # --- Ortak Fonksiyonlar ---
@@ -118,7 +104,7 @@ def send_to_firebase(path, data):
     try:
         response = requests.put(full_url, json=data)
         response.raise_for_status()
-        # print(f"Firebase'e PUT ile veri gönderildi: {path}") # Fazla çıktı verebilir, hata ayıklama için açılabilir
+        # print(f"Firebase'e PUT ile veri gönderildi: {path}")
     except requests.exceptions.RequestException as e:
         print(f"Firebase PUT veri gönderme hatası: {e}")
     except Exception as e:
@@ -153,7 +139,7 @@ def send_at(command, expected_response, timeout):
         return None
 
     try:
-        print(f"Gönderiliyor AT: {command}") # Hata ayıklama için her komutu yazdır
+        print(f"Gönderiliyor AT: {command}")
         ser.write((command + '\r\n').encode())
         time.sleep(timeout)
 
@@ -162,7 +148,7 @@ def send_at(command, expected_response, timeout):
             rec_buff = ser.read(ser.inWaiting())
 
         decoded_rec_buff = rec_buff.decode(errors='ignore')
-        print(f"Yanıt: {decoded_rec_buff.strip()}") # Hata ayıklama için her yanıtı yazdır
+        print(f"Yanıt: {decoded_rec_buff.strip()}")
 
         if expected_response not in decoded_rec_buff:
             print(f"HATA: '{command}' komutu için '{expected_response}' yanıtı alınamadı.")
