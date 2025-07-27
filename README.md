@@ -1,4 +1,4 @@
-# Raspi-SIM7600-Fire-IoT: Akıllı Yangın Tespit ve Bildirim Sistemi 🔥📡
+# Raspi-SIM7600-Fire-IoT: Akıllı Yangın Tespit ve Bildirim Sistemi 
 
 Bu proje, **Raspberry Pi**, **SIM7600X 4G modülü** ve **YOLO tabanlı görüntü işleme** teknolojisini birleştirerek yangınları **gerçek zamanlı** olarak tespit eden ve **SMS, arama ve Firebase** üzerinden anında uyarılar gönderen **akıllı bir IoT yangın izleme sistemidir**.
 
@@ -44,9 +44,9 @@ Bu sistem özellikle **ormanlar, endüstriyel alanlar** ve **uzak bölgeler** gi
 
 ---
 
-## 🛠️ Gereksinimler
+##  Gereksinimler
 
-### 📦 Donanım
+###  Donanım
 
 | Bileşen | Açıklama |
 |--------|----------|
@@ -67,13 +67,13 @@ Bu sistem özellikle **ormanlar, endüstriyel alanlar** ve **uzak bölgeler** gi
   ```bash
   sudo apt install -y libcamera-tools git screen python3-venv
 
-# 🔥 Raspi-SIM7600-Fire-IoT
+#  Raspi-SIM7600-Fire-IoT
 
 Raspberry Pi, SIM7600 4G modülü ve YOLO görüntü işleme teknolojisini kullanarak **gerçek zamanlı yangın tespiti**, **SMS/arama bildirimi** ve **Firebase entegrasyonu** sağlayan akıllı sistemdir.
 
 ---
 
-## 🚀 Kurulum
+##  Kurulum
 
 ### 1. Raspberry Pi Hazırlığı
 
@@ -97,7 +97,7 @@ sudo raspi-config
 sudo adduser $USER dialout
 ```
 
-🔁 **Raspberry Pi’yi yeniden başlatın**
+ **Raspberry Pi’yi yeniden başlatın**
 
 ### 4. (İsteğe Bağlı) ModemManager'ı devre dışı bırakın
 
@@ -108,7 +108,7 @@ sudo systemctl disable ModemManager
 
 ---
 
-## 📁 Proje Kurulumu
+##  Proje Kurulumu
 
 ### 1. Depoyu Klonlayın
 
@@ -131,7 +131,7 @@ pip install opencv-python ultralytics numpy requests pyserial RPi.GPIO
 
 ---
 
-## 🔥 Firebase Entegrasyonu
+##  Firebase Entegrasyonu
 
 1. Firebase Console üzerinden yeni proje oluşturun.  
 2. **Build > Realtime Database** menüsünden veritabanı oluşturun.  
@@ -154,7 +154,7 @@ https://your-project-id-default-rtdb.firebaseio.com
 
 ---
 
-## ⚙️ Konfigürasyon
+##  Konfigürasyon
 
 `main.py` dosyasında ayarları şu şekilde yapılandırın:
 
@@ -174,7 +174,7 @@ GPS_BAUDRATE = 115200
 
 ---
 
-## 🧪 Kullanım
+##  Kullanım
 
 ```bash
 source venv/bin/activate
@@ -188,7 +188,7 @@ python3 main.py
 
 ---
 
-## 📷 Kamera & YOLO İşleme
+##  Kamera & YOLO İşleme
 
 - Arducam 64MP kamera kullanılır
 - libcamera ile uyumludur
@@ -208,11 +208,11 @@ while True:
     # işleme devam
 ```
 
-📌 Bazı Arducam modelleri özel libcamera sürücüleri gerektirir. Gerekirse [Arducam Resmi Sitesi](https://www.arducam.com) üzerinden uygun sürücüyü kurun.
+ Bazı Arducam modelleri özel libcamera sürücüleri gerektirir. Gerekirse [Arducam Resmi Sitesi](https://www.arducam.com) üzerinden uygun sürücüyü kurun.
 
 ---
 
-## 🗂️ Ekran Çıktısı Yapısı
+##  Ekran Çıktısı Yapısı
 
 ```
 ./Output/
@@ -226,7 +226,7 @@ while True:
 
 ---
 
-## ☁️ Firebase Veri Yapısı
+##  Firebase Veri Yapısı
 
 ```json
 veri/
@@ -257,9 +257,9 @@ veri/
 
 ---
 
-## 🧰 Sorun Giderme
+##  Sorun Giderme
 
-### 🔌 Seri Port Hatası
+###  Seri Port Hatası
 
 - UART bağlantısını ve `raspi-config` ayarlarını kontrol edin  
 - `dialout` grubuna eklendiğinizden emin olun
@@ -270,12 +270,12 @@ veri/
 sudo apt install libcamera-tools
 ```
 
-### 📶 SIM7600 Ağa Bağlanmıyor
+###  SIM7600 Ağa Bağlanmıyor
 
 - SIM kartın aktif ve PIN kodunun doğru olduğundan emin olun  
 - Anten bağlantısını ve sinyal seviyesini kontrol edin
 
-### 📡 GPS Verisi Alınamıyor
+###  GPS Verisi Alınamıyor
 
 - Açık alanda olun (ilk sinyal birkaç dakika sürebilir)  
 - GPS’i AT komutuyla etkinleştirin:
